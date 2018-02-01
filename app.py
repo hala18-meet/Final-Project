@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
-
+from flask_heroku import Heroku
 #from flask.ext.heroku import Heroku
 
 app = Flask(__name__)
+heroku = Heroku(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
 
 
