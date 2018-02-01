@@ -1,139 +1,100 @@
-#import sys
-#import math
-# flask imports
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
-# SQLAlchemy
-# from database import Base, Pos
+#from flask.ext.heroku import Heroku
 
 app = Flask(__name__)
-app.debug = True
-app.config['SQLAlCHEMY_DATABASE_URI']='sqlite:////tmp/test.db'
-db=SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
 
 
+#heroku = Heroku(app)
+db = SQLAlchemy(app)
 
+ 
+class Donate(db.Model):
+    __tablename__ = "donate"
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column('first_name', db.Unicode)
+    last_name = db.Column('last_name', db.Unicode)
+    type_of_pet=db.Column('type_of_pet', db.Unicode)
+    age_of_pet=db.Column('age_of_pet', db.Unicode)
+    image_of_pet=db.Column('image_of_pet', db.Unicode)
+    phone_number=db.Column('phone_number', db.Unicode)
 
-class Songs(db.Model):
-    id            = db.Column(db.Integer, primary_key=True , autoincrement=True)
-    title         = db.Column(db.String(30), nullable=False)
-    category      = db.Column(db.String(30), nullable=False)
-    
-    def __reper__(self):
-        return '<songs %r>' % self.title
-
+    # def __init__
 db.create_all()
+
+
+
+
+
+@app.route('/submit_form', methods=['POST'])
+def submit_form():
+    username1 = request.form["fname"]
+    username2 = request.form["lname"]
+    username3 = request.form["tname"]
+    username4 = request.form["aname"]
+    username5 = request.form["iname"] 
+    username6 = request.form["pname"] 
     
+    donate1=Donate(first_name=username1, last_name=username2, type_of_pet=username3, age_of_pet=username4, image_of_pet=username5, phone_number=username6)
+    
+    db.session.add(donate1)
+    db.session.commit()
+
+    users = Donate.query.all()
+    return render_template('adopt.html', var=users)
 
 
-# setup
 
+# Create our database model
+class User(db.Model):
+    __tablename__ = "users"
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True)
 
+    def __init__(self, email):
+        self.email = email
+
+    def __repr__(self):
+        return '<E-mail %r>' % self.email
+
+# Set "homepage" to index.html
 @app.route('/')
-def main():
-    print("hi")
-    # posts = session.query(Post).order_by("id desc").all()
-    # i = 0
-    # total_posts = len(posts)
-    
-    # mid_way = math.ceil(total_posts/2)
+def index():
+    return render_template('home.html')
 
-    # #print(total_posts, file=sys.stderr)
-    # posts_1 = []
-    # posts_2 = []
-    # while i < mid_way:
-    #     posts_1.append(posts[i])
-    #     i += 1
-    # j = mid_way
-    # while j < total_posts:
-    #     posts_2.append(posts[j])
-    #     j += 1
-    return render_template('main.html', posts=None)
+@app.route('/home')
+def home():
+    return render_template('home.html')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
-@app.route('/mood_music')
-def mood_music():
-    return render_template('post.html')
-
-@app.route('/find_mood')
-def find_mood():
-    return render_template('findmymood.html')
-
-@app.route('/game')
-def game():
-    return render_template('game.html')
-
-@app.route('/articles')
-def articles():
-    return render_template('articles.html')
-
-@app.route('/main_page')
-def main_page():
-    return render_template('main.html')
-@app.route('/quizz')
-def quizz():
-    return render_template('the quizz.html')
+@app.route('/donate')
+def donate():
+    return render_template('donate.html')
+@app.route('/adopt')
+def adopt():
+    return render_template('adopt.html')
 
 
 
-
-# @app.route('/<string:category_name>')
- #def sad (category_name):
-     #category_posts= session.query(Songs).filter_by(category="sad songs").all()
-     #return render_template('post.html', category_name=category_name, posts=category_posts)
-
-
-@app.route('/songs', methods=['GET', 'POST'])
-def songs():
-    if request.method == "GET":
-        return render_template('post.html')
-    elif request.method == "POST":
-
-        new_song=Songs()
-        
-        new_song.title=request.form.get('title')
-        new_song.category= request.form.get('category')
-        db.session.add(new_song)
-        db.session.commit()
-
-        return render_template("post.html")
-
-
-        
-        # print('This error output %s' % new_title,  file=sys.stderr)
-
-        #post = Post( title=new_title, category=new_category)
-        #session.add(post)
-        #session.commit()
-        # ADD SQL SESSION
-
-
-        return redirect('/')
-
-@app.route('/sadsongs', methods=['GET', 'POST'])
-def sadsongs():
-    sad_s=Songs.query.filter_by(category="sad")
-    return render_template('sadsongs.html', sad_s=sad_s)
-
-@app.route('/happysongs', methods=['GET', 'POST'])
-def happysongs():
-    happy_s= Songs.query.filter_by(category="happy")
-    return render_template('happy.html', happy_s=happy_s)
-
-@app.route('/powerfullsongs', methods=['GET', 'POST'])
-def powerfullsongs():
-    powerfull_s=Songs.query.filter_by(category="powerfull")
-    return render_template('powerfull.html', powerfull_s=powerfull_s)
-
-@app.route('/romanticsongs', methods=['GET', 'POST'])
-def romanticsongs():
-    romantic_s=Songs.query.filter_by(category="romantic")
-    return render_template('romantic.html', romantic_s=romantic_s)
-
-
-
-
+# Save e-mail to database and send to success page
+@app.route('/prereg', methods=['POST'])
+def prereg():
+    email = None
+    if request.method == 'POST':
+        email = request.form['email']
+        # Check that email does not already exist (not a great query, but works)
+        if not db.session.query(User).filter(User.email == email).count():
+            reg = User(email)
+            db.session.add(reg)
+            db.session.commit()
+            return render_template('success.html')
+    return render_template('index.html')
 
 if __name__ == '__main__':
-   app.run()
+    #app.debug = True
+    app.run()

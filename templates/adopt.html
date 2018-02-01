@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+ <title>Adopt.py</title>
+ <h1> ADOPT</h1>
+ 
+<style>
+body {
+    background-color: lightblue;
+}
+</style>
+
+		
+
+</head>
+<body>
+
+{% for entry in var %}
+	<h1>{{entry.first_name}}</h1>
+	<h1>{{entry.last_name}}</h1>
+	<h1>{{entry.type_of_pet}}</h1>
+	<h1>{{entry.age_of_pet}}</h1>
+	<h1><a href={{entry.image_of_pet}} > link to image</a></h1>
+
+	 <img src={{entry.image_of_pet}}>
+
+	<h1>{{entry.phone_number}}</h1>
+	<hr>
+
+{% endfor %}
+
+	
+
+
+</body>
+
+</html>
