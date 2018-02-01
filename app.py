@@ -95,6 +95,6 @@ def prereg():
             return render_template('success.html')
     return render_template('index.html')
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
     #app.debug = True
     # app.run()
