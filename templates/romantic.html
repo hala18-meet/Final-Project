@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+      <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}">
+</head>	
+
+<body class="w3-pale-red">
+
+<!-- Navbar (sit on top) -->
+
+  <div class="w3-bar w3-white w3-card" id="myNavbar">
+    <a href="#home" class="w3-bar-item w3-button w3-wide">LOGO</a>
+    
+
+<!-- Right-sided navbar links -->
+    <div class="w3-right w3-hide-small">
+      <a href="{{url_for('main')}}" class="w3-bar-item w3-button">home</a>
+      <a href="{{url_for('find_mood')}}" class="w3-bar-item w3-button"><i class="fa fa-user"></i> find my mood </a>
+      <a href="{{url_for('mood_music')}}" class="w3-bar-item w3-button"><i class="fa fa-th"></i> mood music</a>
+      <a href="{{url_for('articles')}}" class="w3-bar-item w3-button"><i class="fa fa-usd"></i> articles</a>
+      <a href="{{url_for('game')}}" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> game</a>
+    </div>
+    </div>
+
+<!-- <iframe width="759" height="427" src="https://www.youtube.com/embed/cxjvTXo9WWM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
+
+
+
+
+</body>
+{% for s in romantic_s %}
+<<!-- h1>{{s.title}}</h1>-->
+<iframe width="759" height="427" src="{{s.title}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+{% endfor %}
+

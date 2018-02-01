@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>add a song </title>
+	<meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+      <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}">
+</head>	
+
+<body class="w3-pale-red">
+
+<!-- Navbar (sit on top) -->
+
+  <div class="w3-bar w3-white w3-card" id="myNavbar">
+    <a href="#home" class="w3-bar-item w3-button w3-wide">LOGO</a>
+    
+
+<!-- Right-sided navbar links -->
+    <div class="w3-right w3-hide-small">
+      <a href="{{url_for('main')}}" class="w3-bar-item w3-button">home</a>
+      <a href="{{url_for('find_mood')}}" class="w3-bar-item w3-button"><i class="fa fa-user"></i> find my mood </a>
+      <a href="{{url_for('mood_music')}}" class="w3-bar-item w3-button"><i class="fa fa-th"></i> mood music</a>
+      <a href="{{url_for('articles')}}" class="w3-bar-item w3-button"><i class="fa fa-usd"></i> articles</a>
+      <a href="{{url_for('game')}}" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> game</a>
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+<div id="black">
+
+
+
+<h1>add a song </h1><br>url:
+if you want to add a song you need to follow these steps:
+<br>
+1. do a right click on the youtube video and chose to copy the embed code 
+<br>
+2. since the whole link appeard , just copy the src and paste it in this textbox
+<br>
+<form action="{{url_for('songs')}}", method="POST">
+<input type="text" name="title" placeholder="" style="color: black;"> <br>
+Category:
+<br>
+<input type="radio" name="category" value="sad">sad 
+<br>
+<input type="radio" name="category" value="happy">happy
+<br>
+
+
+<input type="radio" name="category" value="powerfull">powerfull
+<br>
+<input type="radio" name="category" value="romantic">romantic
+<br>
+
+</div>
+<br>
+<input type="submit" class="button" style="color: black" name="post" ><br>
+</form>
+
+<center>
+<a href="{{url_for('sadsongs')}}" ><button class="w3-button w3-padding-large w3-white w3-border" >
+
+</center>
+
+
+  <div class="w3-card w3-margin">
+    <div class="w3-container w3-padding">
+      <h4>select a mood</h4>
+    </div>
+    <ul class="w3-ul w3-hoverable w3-white">
+      <li class="w3-padding-16">
+        <img src="/w3images/workshop.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+        <span class="w3-large">
+<a href="{{url_for('romanticsongs')}}" ><button class="w3-button w3-padding-large w3-white w3-border" >romantic</button>
+
+
+</span><br>
+        
+      </li>
+      <li class="w3-padding-16">
+        <img src="/w3images/workshop.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+        <span class="w3-large">
+<a href="{{url_for('sadsongs')}}" ><button class="w3-button w3-padding-large w3-white w3-border" >sad songs</button>
+
+
+</span><br>
+        
+      </li> 
+      <li class="w3-padding-16">
+        <img src="/w3images/skies.jpg"  alt="Image" class="w3-left w3-margin-right" style="width:50px">
+        <span class="w3-large">
+<a href="{{url_for('happysongs')}}" ><button class="w3-button w3-padding-large w3-white w3-border" >happy</button>
+
+
+</span><br>
+        
+      </li>   
+      <li class="w3-padding-16 w3-hide-medium w3-hide-small">
+        <img src="/w3images/workshop.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+        <span class="w3-large">
+<a href="{{url_for('powerfullsongs')}}" ><button class="w3-button w3-padding-large w3-white w3-border" >powerfull</button>
+
+
+</span><br>
+        
+      </li>  
+    </ul>
+  </div>
+  <hr> 

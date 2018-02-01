@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+</head>
+<body class="w3-pale-red">
+
+<!-- Navbar (sit on top) -->
+
+  <div class="w3-bar w3-white w3-card" id="myNavbar">
+    <a href="#home" class="w3-bar-item w3-button w3-wide">LOGO</a>
+    
+
+<!-- Right-sided navbar links -->
+    <div class="w3-right w3-hide-small">
+      <a href="main.html" class="w3-bar-item w3-button">home</a>
+      <a href="find my mood.html" class="w3-bar-item w3-button"><i class="fa fa-user"></i> find my mood </a>
+      <a href="mood music.html" class="w3-bar-item w3-button"><i class="fa fa-th"></i> mood music</a>
+      <a href="articles.html" class="w3-bar-item w3-button"><i class="fa fa-usd"></i> articles</a>
+      <a href="game.html" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> game</a>
+    </div>
+    </div>
+
+
+      
+
+<body style="margin: 30px"> 
+
+<div id="black">
+
+
+
+<h1>add a song </h1><br>name of the song :
+<br>
+<form action="{{url_for('post')}}", method="post">
+<input type="text" name="title" placeholder="add a song " style="color: black;"> <br>
+
+Category:
+<br>
+<input type="radio" name="category" value="Technology">sad 
+<br>
+<input type="radio" name="category" value="Politics">happy 
+<br>
+<input type="radio" name="category" value="Food">motivational 
+<br>
+<input type="radio" name="category" value="Art">loe song
+<br>
+
+<br>
+
+</div>
+<br>
+<input type="submit" class="button" style="color: black" name="post"><br>
+</form>
+
+
+   
+</body>
+</html> 
